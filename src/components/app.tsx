@@ -20,6 +20,7 @@ import Contact from './contact';
 import FeaturedWorks from './featured-works';
 import Footer from './footer';
 import Header from './header';
+import MobileNav from './mobile-nav';
 import Nav from './nav';
 import Services from './services';
 
@@ -42,6 +43,7 @@ class App extends React.Component<{}, State> {
         <ThemeProvider theme={th}>
           <Main id="top">
             <Nav />
+            <MobileNav />
             <Header />
             <Switch>
               <Route exact path={SERVICES_PATH} component={Services} />

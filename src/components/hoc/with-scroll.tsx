@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { parse } from 'querystring';
-import { scrollToId } from '../../utils/ui';
+import * as React from 'react';
+import { scrollToId } from '../../ui/utils';
 
 export interface Props {
   location?: {

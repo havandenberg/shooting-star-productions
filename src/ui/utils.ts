@@ -1,3 +1,6 @@
+import * as Scroll from 'react-scroll';
+import theme from './theme';
+
 const TABLET_BREAKPOINT = 768;
 const SMALL_BREAKPOINT = 699;
 const TINY_BREAKPOINT = 321;
@@ -28,3 +31,9 @@ export const isTabletUp = () =>
 
 export const isTiny = () =>
   typeof window !== 'undefined' && window.innerWidth < TINY_BREAKPOINT;
+
+export const scrollToId = (id: string = 'top', customOptions?: object) =>
+  Scroll.scroller.scrollTo(id, {
+    ...theme.scrollOptions,
+    ...customOptions,
+  });

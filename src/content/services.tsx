@@ -5,79 +5,67 @@ import HouseImg from '../assets/images/house.svg';
 import IdeaImg from '../assets/images/idea.svg';
 import SocialMediaImg from '../assets/images/social-media.svg';
 import TestImg from '../assets/images/test.png';
-import th from '../ui/theme';
+import { Video } from '../types/video';
 import { ASSETS_PATH } from '../utils/constants';
+import categories, {
+  COMMERCIAL_ADS,
+  CUSTOM_IDEA,
+  EVENTS,
+  FITNESS_VIDEOS,
+  REAL_ESTATE,
+  SOCIAL_MEDIA,
+} from './categories';
 
-export interface Service {
-  activeColor: string;
-  frameColor: string;
-  iconSrc: string;
-  id: string;
-  name: string;
-  projectName: string;
-  videoCover: string;
-  videoSrc: string;
-}
-
-export const services: Service[] = [
+const services: Video[] = [
   {
-    activeColor: th.colors.brand.redLight,
-    frameColor: th.colors.brand.red,
+    categoryId: COMMERCIAL_ADS,
     iconSrc: DroneImg,
-    id: 'commercial-ads',
-    name: 'Commercial Ads',
-    projectName: 'Crunch Fitness',
+    id: 'crunch-fitness',
+    name: 'Crunch Fitness',
     videoCover: TestImg,
     videoSrc: `${ASSETS_PATH}/test.mp4`,
   },
   {
-    activeColor: th.colors.brand.blueLight,
-    frameColor: th.colors.brand.blue,
+    categoryId: FITNESS_VIDEOS,
     iconSrc: FitnessImg,
-    id: 'fitness-videos',
-    name: 'Fitness Videos',
-    projectName: 'Crunch Fitness',
+    id: 'crunch-fitness-1',
+    name: 'Crunch Fitness',
     videoCover: TestImg,
     videoSrc: `${ASSETS_PATH}/test.mp4`,
   },
   {
-    activeColor: th.colors.brand.greenLight,
-    frameColor: th.colors.brand.green,
+    categoryId: REAL_ESTATE,
     iconSrc: HouseImg,
-    id: 'real-estate',
-    name: 'Real Estate',
-    projectName: 'Crunch Fitness',
+    id: 'crunch-fitness-2',
+    name: 'Crunch Fitness',
     videoCover: TestImg,
     videoSrc: `${ASSETS_PATH}/test.mp4`,
+    ...categories.realEstate,
   },
   {
-    activeColor: th.colors.brand.orangeLight,
-    frameColor: th.colors.brand.orange,
+    categoryId: EVENTS,
     iconSrc: EventsImg,
-    id: 'events',
-    name: 'Events',
-    projectName: 'Crunch Fitness',
+    id: 'crunch-fitness-3',
+    name: 'Crunch Fitness',
     videoCover: TestImg,
     videoSrc: `${ASSETS_PATH}/test.mp4`,
   },
   {
-    activeColor: th.colors.brand.purpleLight,
-    frameColor: th.colors.brand.purple,
+    categoryId: SOCIAL_MEDIA,
     iconSrc: SocialMediaImg,
-    id: 'social-media',
-    name: 'Social Media',
-    projectName: 'Crunch Fitness',
+    id: 'crunch-fitness-4',
+    name: 'Crunch Fitness',
     videoCover: TestImg,
     videoSrc: `${ASSETS_PATH}/test.mp4`,
   },
   {
-    activeColor: th.colors.brand.primary,
-    frameColor: th.colors.brand.primaryDark,
+    categoryId: CUSTOM_IDEA,
     iconSrc: IdeaImg,
-    id: 'custom-idea',
-    name: 'Your Awesome Idea',
-    projectName: 'Crunch Fitness',
+    id: 'crunch-fitness-5',
+    name: 'Crunch Fitness',
     videoCover: TestImg,
     videoSrc: `${ASSETS_PATH}/test.mp4`,
   },
 ];
+
+export default services;

@@ -11,6 +11,11 @@ const StarTrails = styled(l.Img)({
   left: -950,
   top: `-${th.sizes.xl}`,
   position: 'absolute',
+  [th.breakpointQueries.small]: {
+    height: '95%',
+    left: -550,
+    top: `-${th.sizes.md}`,
+  },
 });
 
 const Header = () => (
@@ -23,7 +28,7 @@ const Header = () => (
       width="100%">
       <l.Div position="relative">
         <ty.Link to={SERVICES_PATH}>
-          <l.Img size={200} src={LogoImg} />
+          <l.Img size={[125, 160, 200]} src={LogoImg} />
         </ty.Link>
         <StarTrails src={StarTrailsImg} />
       </l.Div>

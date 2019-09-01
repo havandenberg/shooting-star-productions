@@ -9,8 +9,8 @@ import Background from '../components/background';
 import l from '../ui/layout';
 import th from '../ui/theme';
 import ty from '../ui/typography';
+import { isDesktop, isTabletUp, scrollToId } from '../ui/utils';
 import { INSTAGRAM_PATH, YOUTUBE_PATH } from '../utils/constants';
-import { isDesktop } from '../utils/view';
 
 const navItems = [
   { name: 'Services', path: '/services' },
@@ -25,11 +25,25 @@ const NavItem = styled(ty.Text)({
   ':hover': {
     color: th.colors.text.link,
   },
-  color: 'white',
+  color: th.colors.white,
   cursor: 'pointer',
   padding: `${th.spacing.sm} ${th.spacing.md}`,
   transition: th.transitions.default,
 });
+
+export const navItemElements = R.map(
+  item => (
+    <NavLink
+      activeClassName="active-link"
+      exact
+      key={item.path}
+      onClick={() => scrollToId()}
+      to={item.path}>
+      <NavItem fontSize={th.fontSizes.main}>{item.name}</NavItem>
+    </NavLink>
+  ),
+  navItems,
+);
 
 interface State {
   hoverItem: string;
@@ -48,8 +62,11 @@ class Nav extends React.Component<{}, State> {
     const { hoverItem } = this.state;
     return (
       <div id="nav">
-        <Sticky innerZ={100}>
-          <l.FlexBetween position="relative">
+        <Sticky innerZ={5}>
+          <l.FlexBetween
+            height={th.heights.navHeight}
+            position="relative"
+            width="100%">
             <l.Flex>
               <l.Div width={th.spacing.md} />
               <ty.Anchor
@@ -63,7 +80,7 @@ class Nav extends React.Component<{}, State> {
               </ty.Anchor>
               <l.Div width={th.spacing.md} />
               <ty.Anchor
-               height={th.sizes.icon}
+                height={th.sizes.icon}
                 href={INSTAGRAM_PATH}
                 onMouseEnter={() => this.setHoverItem('instagram')}
                 onMouseLeave={() => this.setHoverItem('')}
@@ -88,20 +105,7 @@ class Nav extends React.Component<{}, State> {
                 </>
               )}
             </l.Flex>
-            <l.Flex>
-              {R.map(
-                item => (
-                  <NavLink
-                    activeClassName="active-link"
-                    exact
-                    key={item.path}
-                    to={item.path}>
-                    <NavItem fontSize={th.fontSizes.main}>{item.name}</NavItem>
-                  </NavLink>
-                ),
-                navItems,
-              )}
-            </l.Flex>
+            {isTabletUp() && <l.Flex>{navItemElements}</l.Flex>}
             <Background />
           </l.FlexBetween>
         </Sticky>

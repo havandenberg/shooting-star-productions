@@ -22,13 +22,13 @@ const PlayImg = ({
           <circle id="Oval" fill="#000000" cx="244" cy="255" r="185"></circle>
           <polygon
             id="Path"
-            fill={color}
+            style={{ fill: color, transition: th.transitions.default }}
             fillRule="nonzero"
             points="211 164.023438 211 347.976562 348.960938 256"></polygon>
           <path
             d="M256,0 C115.390625,0 0,115.390625 0,256 C0,396.609375 115.390625,512 256,512 C396.609375,512 512,396.609375 512,256 C512,115.390625 396.609375,0 256,0 Z M181,404.023438 L181,107.976562 L403.039062,256 L181,404.023438 Z"
             id="Shape"
-            fill={color}
+            style={{ fill: color, transition: th.transitions.default }}
             fillRule="nonzero"></path>
         </g>
       </g>

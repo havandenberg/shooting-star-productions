@@ -1,11 +1,4 @@
-import {
-  DESKTOP,
-  SMALL,
-  TABLET,
-  TABLET_DOWN,
-  TABLET_UP,
-  TINY,
-} from '../utils/view';
+import { DESKTOP, SMALL, TABLET, TABLET_DOWN, TABLET_UP, TINY } from './utils';
 
 export const colors = {
   background: '#000000',
@@ -64,8 +57,8 @@ export const gradients = {
 // Layout
 export const heights = {
   header: '650px',
-  input: '45px',
-  navHeight: '32px',
+  input: '40px',
+  navHeight: '40px',
 };
 
 export const sizes = {
@@ -133,6 +126,7 @@ export const borders = {
   blue: `1px solid ${gradients.red}`,
   button: '2px solid',
   divider: `1px solid ${colors.black}`,
+  error: `2px solid ${colors.status.failure}`,
   gold: `1px solid ${gradients.primary}`,
   orange: `1px solid ${gradients.orange}`,
   purple: `1px solid ${gradients.purple}`,
@@ -152,7 +146,7 @@ export const breakpoints = [320, 700, 999];
 
 export const breakpointQueries = {
   [DESKTOP]: '@media (min-width: 1000px)',
-  [SMALL]: '@media (max-width: 320px)',
+  [SMALL]: '@media (max-width: 699px)',
   [TABLET]: '@media (min-width: 700px) and (max-width: 999px)',
   [TABLET_DOWN]: '@media (max-width: 999px)',
   [TABLET_UP]: '@media (min-width: 700px)',
@@ -165,7 +159,7 @@ export const transitions = {
 
 export const scrollOptions = {
   duration: 300,
-  offset: -60,
+  offset: -100,
   smooth: 'true',
 };
 
@@ -191,10 +185,56 @@ export const scrollStyles = (showScrollBar: boolean) => ({
     border: showScrollBar ? '8px solid rgba(0, 0, 0, 0)' : 0,
     height: showScrollBar ? 4 : 0,
   },
-  overflow: 'scroll',
+  overflow: 'auto',
 });
 
 // Variants
+const burgerMenuStyles = {
+  bmBurgerButton: {
+    height: sizes.icon,
+    position: 'fixed',
+    right: spacing.md,
+    top: spacing.sm,
+    width: sizes.icon,
+  },
+  bmBurgerBars: {
+    background: colors.white,
+  },
+  bmBurgerBarsHover: {
+    background: '#a90000',
+  },
+  bmCrossButton: {
+    height: sizes.sm,
+    width: sizes.sm,
+  },
+  bmCross: {
+    background: colors.white,
+  },
+  bmMenuWrap: {
+    position: 'fixed',
+    height: 'auto',
+  },
+  bmMenu: {
+    background: '#000000',
+    padding: `${spacing.sm} ${spacing.sm}`,
+    fontSize: '1.15em',
+  },
+  bmMorphShape: {
+    fill: colors.brand.primary,
+  },
+  bmItemList: {
+    color: '#b8b7ad',
+    padding: '0.8em',
+  },
+  bmItem: {
+    display: 'inline-block',
+    width: 220,
+  },
+  bmOverlay: {
+    background: 'rgba(0, 0, 0, 0.3)',
+  },
+};
+
 export const colorStyles = {
   main: {
     background: colors.fill.main,
@@ -295,9 +335,8 @@ export const globalStyles = {
   },
   // Button
   button: {
-    borderRadius: borderRadii.default,
-    fontSize: fontSizes.md,
-    height: heights.input,
+    border: 'none',
+    fontFamily: fontFamilies.main,
     paddingX: '32px',
   },
 };
@@ -308,6 +347,7 @@ export const theme = {
   boxShadows,
   breakpoints,
   breakpointQueries,
+  burgerMenuStyles,
   colors,
   colorStyles,
   fontFamilies,

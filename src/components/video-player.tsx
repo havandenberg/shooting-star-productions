@@ -3,25 +3,26 @@ import * as R from 'ramda';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import PlayImg from '../assets/images/play';
-import { Service } from '../content/services';
+import categories from '../content/categories';
+import { Video } from '../types/video';
 import l from '../ui/layout';
 import th from '../ui/theme';
 import ty from '../ui/typography';
+import VideoSelector from './video-selector';
 
-const ControlIcon = styled(l.Div)({
+const PlayIcon = styled(l.Div)({
   bottom: th.spacing.md,
   cursor: 'pointer',
   height: th.sizes.lg,
+  left: '50%',
   position: 'absolute',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
   width: th.sizes.lg,
   zIndex: 3,
-});
-
-const PlayIcon = styled(ControlIcon)({
-  left: '50%',
-  top: '50%',
-  transform: 'translate(-50%)',
-  height: th.sizes.lg,
+  [th.breakpointQueries.small]: {
+    height: th.sizes.sm,
+  },
 });
 
 const Label = styled(ty.H3)({
@@ -30,6 +31,10 @@ const Label = styled(ty.H3)({
   position: 'absolute',
   right: th.spacing.lg,
   zIndex: 1,
+  [th.breakpointQueries.small]: {
+    bottom: th.spacing.sm,
+    right: th.spacing.md,
+  },
 });
 
 const Frame = styled(l.Div)(
@@ -47,11 +52,17 @@ const Frame = styled(l.Div)(
 const BottomFrame = styled(Frame)({
   height: th.spacing.md,
   width: '70%',
+  [th.breakpointQueries.small]: {
+    height: th.spacing.sm,
+  },
 });
 
 const RightFrame = styled(Frame)({
   height: '70%',
   width: th.spacing.md,
+  [th.breakpointQueries.small]: {
+    width: th.spacing.sm,
+  },
 });
 
 const PlayerWrapper = styled(l.Div)({
@@ -59,12 +70,21 @@ const PlayerWrapper = styled(l.Div)({
   position: 'relative',
 });
 
+export interface VideoChildrenProps {
+  selectedVideo: Video;
+}
+
 interface Props {
-  service: Service;
+  alwaysShowProjectName?: boolean;
+  children?(props: VideoChildrenProps): React.ReactNode;
+  initialSelectedId?: string;
+  videos: Video[];
 }
 
 interface State {
+  hoverId: string;
   isPlaying: boolean;
+  selectedVideoId: string;
 }
 
 class VideoPlayer extends React.Component<Props, State> {
@@ -74,16 +94,23 @@ class VideoPlayer extends React.Component<Props, State> {
     super(props);
     this.vid = React.createRef();
     this.state = {
+      hoverId: '',
+      selectedVideoId: props.initialSelectedId || props.videos[0].id,
       isPlaying: false,
     };
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (!R.equals(prevProps.service, this.props.service)) {
-      this.pause();
-    }
-    return null;
-  }
+  onMouseEnter = (hoverId: string) => {
+    this.setState({ hoverId });
+  };
+
+  onMouseLeave = () => {
+    this.setState({ hoverId: '' });
+  };
+
+  setSelectedVideo = (selectedVideoId: string) => {
+    this.setState({ selectedVideoId }, this.pause);
+  };
 
   pause = () => {
     this.setState({ isPlaying: false }, () => {
@@ -111,31 +138,75 @@ class VideoPlayer extends React.Component<Props, State> {
   };
 
   render() {
-    const { service } = this.props;
-    const { isPlaying } = this.state;
+    const { alwaysShowProjectName, children, videos } = this.props;
+    const { hoverId, isPlaying, selectedVideoId } = this.state;
+
+    const videoProps = {
+      selectedVideoId,
+      hoverId: hoverId,
+      onMouseLeave: this.onMouseLeave,
+    };
+
+    const selectedVideo =
+      R.find((video: Video) => R.equals(video.id, selectedVideoId), videos) ||
+      videos[0];
 
     return (
-      <PlayerWrapper onClick={this.togglePlaying}>
-        {!isPlaying && (
+      <l.FlexColumn width="100%">
+        <l.ScrollFlex
+          id="categories"
+          mx={`-${th.spacing.md}`}
+          width={['100%', '100%', '90%']}>
+          {videos.map((video: Video) => (
+            <VideoSelector
+              alwaysShowProjectName={alwaysShowProjectName}
+              key={video.id}
+              onMouseEnter={() => this.onMouseEnter(video.id)}
+              setVideoId={() => this.setSelectedVideo(video.id)}
+              video={video}
+              {...videoProps}
+            />
+          ))}
+        </l.ScrollFlex>
+        <l.Div height={[th.spacing.lg, th.spacing.md]} />
+        <l.FlexCentered width={['100%', '80%', '65%']}>
+          <PlayerWrapper onClick={this.togglePlaying}>
+            {!isPlaying && (
+              <>
+                <Label>{selectedVideo.name}</Label>
+                <PlayIcon>
+                  <PlayImg
+                    color={categories[selectedVideo.categoryId].frameColor}
+                    height="100%"
+                    width="100%"
+                  />
+                </PlayIcon>
+              </>
+            )}
+            <video
+              controls={isPlaying}
+              height="100%"
+              preload="true"
+              poster={selectedVideo.videoCover}
+              ref={this.vid}
+              width="100%">
+              <source src={selectedVideo.videoSrc} type="video/mp4" />
+            </video>
+            <BottomFrame
+              background={categories[selectedVideo.categoryId].frameColor}
+            />
+            <RightFrame
+              background={categories[selectedVideo.categoryId].frameColor}
+            />
+          </PlayerWrapper>
+        </l.FlexCentered>
+        {children && (
           <>
-            <Label>{service.projectName}</Label>
-            <PlayIcon>
-              <PlayImg color={service.frameColor} height="100%" width="100%" />
-            </PlayIcon>
+            <l.Div height={th.spacing.xl} />
+            {children({ selectedVideo })}
           </>
         )}
-        <video
-          controls={isPlaying}
-          height="100%"
-          preload="true"
-          poster={service.videoCover}
-          ref={this.vid}
-          width="100%">
-          <source src={service.videoSrc} type="video/mp4" />
-        </video>
-        <BottomFrame background={service.frameColor} />
-        <RightFrame background={service.frameColor} />
-      </PlayerWrapper>
+      </l.FlexColumn>
     );
   }
 }

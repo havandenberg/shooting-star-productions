@@ -34,6 +34,17 @@ import { StyleSet, StyleValue } from '../types/ui';
 import th from './theme';
 
 // Div is the base layout component
+interface CustomDivProps {
+  alignEnd?: boolean;
+  alignStart?: boolean;
+  columnOnMobile?: boolean;
+  columnReverseOnMobile?: boolean;
+  grow?: number;
+  justifyEnd?: boolean;
+  justifyStart?: boolean;
+  pointer?: boolean;
+  wrap?: boolean;
+}
 export type DivProps = BackgroundSetProps &
   BorderSetProps &
   SpaceSetProps &
@@ -42,7 +53,34 @@ export type DivProps = BackgroundSetProps &
   GridSetProps &
   LayoutSetProps &
   TransformSetProps &
-  PositionSetProps;
+  PositionSetProps &
+  CustomDivProps;
+
+const customOptions: (props: CustomDivProps) => any = ({
+  alignEnd,
+  alignStart,
+  columnOnMobile,
+  columnReverseOnMobile,
+  grow,
+  justifyEnd,
+  justifyStart,
+  pointer,
+  wrap,
+}) => ({
+  alignItems: alignStart ? 'flex-start' : alignEnd ? 'flex-end' : undefined,
+  justifyContent: justifyStart
+    ? 'flex-start'
+    : justifyEnd
+    ? 'flex-end'
+    : undefined,
+  cursor: pointer ? 'pointer' : undefined,
+  flexGrow: grow,
+  flexWrap: wrap ? 'wrap' : undefined,
+  [th.breakpointQueries.small]:
+    columnOnMobile || columnReverseOnMobile
+      ? { flexDirection: columnReverseOnMobile ? 'column-reverse' : 'column' }
+      : {},
+});
 
 export const divPropsSet = [
   backgroundSet,
@@ -54,35 +92,36 @@ export const divPropsSet = [
   spaceSet,
   transformSet,
   positionSet,
+  customOptions,
 ];
 
 const Div = styled.div<DivProps & any>(...divPropsSet);
 const Span = styled.span<DivProps & any>(...divPropsSet);
 
-const Flex = styled(Div)(
+const Flex = styled(Div)<DivProps & any>(
   { alignItems: 'center', display: 'flex' },
   ...divPropsSet,
 );
-const FlexBetween = styled(Flex)(
+const FlexBetween = styled(Flex)<DivProps & any>(
   {
     justifyContent: 'space-between',
   },
   ...divPropsSet,
 );
-const FlexCentered = styled(Flex)(
+const FlexCentered = styled(Flex)<DivProps & any>(
   {
     justifyContent: 'center',
   },
   ...divPropsSet,
 );
-const FlexColumn = styled(Flex)(
+const FlexColumn = styled(Flex)<DivProps & any>(
   {
     flexDirection: 'column',
   },
   ...divPropsSet,
 );
 
-interface GripProps {
+interface GridProps {
   children: React.ReactNode;
   customStyles?: StyleSet;
   evenSpacing?: boolean;
@@ -101,7 +140,7 @@ const Grid = ({
   maxColumns,
   wrap,
   ...rest
-}: GripProps & DivProps) => (
+}: GridProps & DivProps) => (
   <FlexBetween
     flexWrap={wrap ? 'wrap' : undefined}
     mx={`-${columnGap}`}
@@ -142,7 +181,7 @@ const ScrollFlex = styled(FlexBetween)<DivProps & ScrollProps & any>(
   ...divPropsSet,
 );
 
-const PageContent = styled(Div)(
+const PageContent = styled(Div)<DivProps & any>(
   {
     maxWidth: th.widths.maxContent,
     margin: '0 auto',
@@ -153,7 +192,7 @@ const PageContent = styled(Div)(
 export type ImgProps = HeightProps & SizeProps & TransitionProps & WidthProps;
 const Img = styled.img<ImgProps & any>(height, size, transition, width);
 
-const Gold = styled(Span)(
+const Primary = styled(Span)<DivProps & any>(
   {
     color: th.colors.brand.primary,
   },
@@ -166,7 +205,7 @@ export default {
   FlexBetween,
   FlexCentered,
   FlexColumn,
-  Gold,
+  Primary,
   Grid,
   Img,
   PageContent,

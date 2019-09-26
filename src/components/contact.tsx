@@ -202,13 +202,11 @@ const Contact = () => {
   );
   return (
     <l.FlexColumn mx="auto" my={th.spacing.lg} width={['90%', '90%', '100%']}>
-      <ty.H2 fontSize={th.fontSizes.h3}>
-        <l.Primary>Ready to Partner?</l.Primary>
-      </ty.H2>
+      <ty.H2 fontSize={th.fontSizes.h3}>Ready to Partner?</ty.H2>
       <l.Div height={[th.spacing.lg, th.spacing.xl]} />
       <l.PageContent>
         <l.FlexBetween alignStart columnOnMobile>
-          <l.FlexColumn alignStart={isSmall()} width={['100%', '45%']}>
+          <l.FlexColumn width={['100%', '45%']}>
             <ty.Text center mb={th.spacing.md}>
               We want to learn more about you!
             </ty.Text>
@@ -219,16 +217,18 @@ const Contact = () => {
               <>
                 <l.Div height={th.spacing.lg} />
                 <l.Div width="100%">{form}</l.Div>
+                <l.Div height={th.spacing.xl} />
+                <Stars />
               </>
             )}
-            <l.Div height={th.spacing.xl} />
+            <l.Div height={[th.spacing.xl, th.spacing.xl, th.spacing.xxl]} />
             <ContactLinks />
           </l.FlexColumn>
           {isTabletUp() && <l.Div width="45%">{form}</l.Div>}
         </l.FlexBetween>
-        <l.Div height={[th.spacing.xl, th.spacing.xl, th.spacing.xxl]} />
+        <l.Div height={[th.spacing.xl, th.spacing.xxl]} />
         <Stars />
-        <l.Div height={[th.spacing.xl, th.spacing.xl, th.spacing.xxl]} />
+        <l.Div height={[th.spacing.xl, th.spacing.xxl]} />
         <l.FlexBetween columnOnMobile>
           <l.FlexColumn mb={[th.spacing.lg, 0]} width={['100%', '45%']}>
             <l.Img
@@ -238,8 +238,8 @@ const Contact = () => {
             />
           </l.FlexColumn>
           <l.FlexColumn width={['100%', '45%']}>
-            <ty.LargeText center color={th.colors.brand.primary}>
-              Hi, I'm Nicolas!
+            <ty.LargeText center>
+              Hi, <l.Primary>I'm Nicolas!</l.Primary>
             </ty.LargeText>
             <l.Div height={th.spacing.lg} />
             <ty.SmallText mb={th.spacing.md}>
@@ -260,7 +260,7 @@ const Contact = () => {
           </l.FlexColumn>
         </l.FlexBetween>
       </l.PageContent>
-      <l.Div height={[th.spacing.xl, th.spacing.xl, th.spacing.xxl]} />
+      <l.Div height={[th.spacing.xl, th.spacing.xxl]} />
     </l.FlexColumn>
   );
 };

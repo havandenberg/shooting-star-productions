@@ -9,16 +9,16 @@ import Background from '../components/background';
 import l from '../ui/layout';
 import th from '../ui/theme';
 import ty from '../ui/typography';
-import { isDesktop, isTabletUp, scrollToId } from '../ui/utils';
+import { isDesktop, isTabletOnly, isTabletUp, scrollToId } from '../ui/utils';
 import { INSTAGRAM_PATH, YOUTUBE_PATH } from '../utils/constants';
 
 const navItems = [
   { name: 'Services', path: '/services' },
-  { name: 'Featured Works', path: '/featured-works' },
+  { name: 'Testimonials', path: '/testimonials' },
   { name: 'Contact', path: '/contact' },
 ];
 
-const NavItem = styled(ty.Text)({
+const NavItem = styled(ty.SmallText)({
   '.active-link &': {
     color: th.colors.text.link,
   },
@@ -27,7 +27,9 @@ const NavItem = styled(ty.Text)({
   },
   color: th.colors.white,
   cursor: 'pointer',
-  padding: `${th.spacing.sm} ${th.spacing.md}`,
+  fontFamily: th.fontFamilies.heading,
+  fontWeight: th.fontWeights.normal,
+  padding: `${th.spacing.sm} ${isTabletOnly() ? th.spacing.md : th.spacing.lg}`,
   transition: th.transitions.default,
 });
 
@@ -39,7 +41,7 @@ export const navItemElements = R.map(
       key={item.path}
       onClick={() => scrollToId()}
       to={item.path}>
-      <NavItem fontSize={th.fontSizes.main}>{item.name}</NavItem>
+      <NavItem>{item.name}</NavItem>
     </NavLink>
   ),
   navItems,

@@ -2,13 +2,29 @@ import { background } from 'onno-react';
 import * as R from 'ramda';
 import * as React from 'react';
 import styled from '@emotion/styled';
+import LeftFadeImg from '../assets/images/left-fade.svg';
 import PlayImg from '../assets/images/play';
+import RightFadeImg from '../assets/images/right-fade.svg';
 import categories from '../content/categories';
 import { Video } from '../types/video';
 import l from '../ui/layout';
 import th from '../ui/theme';
 import ty from '../ui/typography';
+import { isMobile } from '../ui/utils';
 import VideoSelector from './video-selector';
+
+const LeftArrow = styled(l.Img)({
+  height: '100%',
+  position: 'absolute',
+  top: 0,
+  transform: `translateX(-${th.spacing.md})`,
+  zIndex: 3,
+});
+
+const RightArrow = styled(LeftArrow)({
+  right: 0,
+  transform: `translateX(${th.spacing.md})`,
+});
 
 const PlayIcon = styled(l.Div)({
   bottom: th.spacing.md,
@@ -85,6 +101,8 @@ interface State {
   hoverId: string;
   isPlaying: boolean;
   selectedVideoId: string;
+  showLeftFade: boolean;
+  showRightFade: boolean;
 }
 
 class VideoPlayer extends React.Component<Props, State> {
@@ -96,9 +114,35 @@ class VideoPlayer extends React.Component<Props, State> {
     this.state = {
       hoverId: '',
       selectedVideoId: props.initialSelectedId || props.videos[0].id,
+      showLeftFade: false,
+      showRightFade: isMobile(),
       isPlaying: false,
     };
   }
+
+  handleScroll = (e: React.SyntheticEvent<HTMLDivElement>) => {
+    const { showLeftFade, showRightFade } = this.state;
+    let shouldShowLeftFade = true;
+    let shouldShowRightFade = false;
+    if (R.equals(e.currentTarget.scrollLeft, 0)) {
+      shouldShowLeftFade = false;
+    }
+    if (
+      e.currentTarget.scrollLeft <
+      e.currentTarget.scrollWidth - e.currentTarget.offsetWidth - 5
+    ) {
+      shouldShowRightFade = true;
+    }
+    if (
+      !R.equals(showLeftFade, shouldShowLeftFade) ||
+      !R.equals(showRightFade, shouldShowRightFade)
+    ) {
+      this.setState({
+        showLeftFade: shouldShowLeftFade,
+        showRightFade: shouldShowRightFade,
+      });
+    }
+  };
 
   onMouseEnter = (hoverId: string) => {
     this.setState({ hoverId });
@@ -139,7 +183,13 @@ class VideoPlayer extends React.Component<Props, State> {
 
   render() {
     const { alwaysShowProjectName, children, videos } = this.props;
-    const { hoverId, isPlaying, selectedVideoId } = this.state;
+    const {
+      hoverId,
+      isPlaying,
+      selectedVideoId,
+      showLeftFade: showLeftArrow,
+      showRightFade: showRightArrow,
+    } = this.state;
 
     const videoProps = {
       selectedVideoId,
@@ -153,22 +203,26 @@ class VideoPlayer extends React.Component<Props, State> {
 
     return (
       <l.FlexColumn width="100%">
-        <l.ScrollFlex
-          id="categories"
-          mx={`-${th.spacing.md}`}
-          width={['100%', '100%', '90%']}>
-          {videos.map((video: Video) => (
-            <VideoSelector
-              alwaysShowProjectName={alwaysShowProjectName}
-              key={video.id}
-              onMouseEnter={() => this.onMouseEnter(video.id)}
-              setVideoId={() => this.setSelectedVideo(video.id)}
-              video={video}
-              {...videoProps}
-            />
-          ))}
-        </l.ScrollFlex>
-        <l.Div height={[th.spacing.lg, th.spacing.md]} />
+        <l.Div position="relative" mx={`-${th.spacing.md}`} width={['100%', '100%', '90%']}>
+          {showLeftArrow && <LeftArrow src={LeftFadeImg} />}
+          <l.ScrollFlex
+            id="categories"
+            onScroll={this.handleScroll}
+            width="100%">
+            {videos.map((video: Video) => (
+              <VideoSelector
+                alwaysShowProjectName={alwaysShowProjectName}
+                key={video.id}
+                onMouseEnter={() => this.onMouseEnter(video.id)}
+                setVideoId={() => this.setSelectedVideo(video.id)}
+                video={video}
+                {...videoProps}
+              />
+            ))}
+          </l.ScrollFlex>
+          {showRightArrow && <RightArrow src={RightFadeImg} />}
+        </l.Div>
+        <l.Div height={[th.spacing.lg, th.spacing.xl]} />
         <l.FlexCentered width={['100%', '80%', '65%']}>
           <PlayerWrapper onClick={this.togglePlaying}>
             {!isPlaying && (

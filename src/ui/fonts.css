@@ -2,3 +2,8 @@
   font-family: 'Audiowide-Regular';
   src: url('../assets/fonts/Audiowide-Regular.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'RobertoCondensed-Regular';
+  src: url('../assets/fonts/RobotoCondensed-Regular.ttf') format('truetype');
+}

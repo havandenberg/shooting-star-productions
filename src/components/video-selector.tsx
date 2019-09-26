@@ -1,28 +1,11 @@
 import * as R from 'ramda';
 import * as React from 'react';
-import styled from '@emotion/styled';
 import categories from '../content/categories';
 import { Video } from '../types/video';
-import l, { DivProps } from '../ui/layout';
+import l from '../ui/layout';
 import th from '../ui/theme';
 import ty from '../ui/typography';
-import { isTabletUp, scrollToId } from '../ui/utils';
-
-interface ActiveIndicatorProps {
-  active: boolean;
-  activeColor: string;
-}
-
-const ActiveIndicator = styled(l.Div)<DivProps & ActiveIndicatorProps>(
-  {
-    height: th.spacing.xs,
-    transition: th.transitions.default,
-    width: th.spacing.xxl,
-  },
-  ({ active, activeColor }: { active: boolean; activeColor: string }) => ({
-    background: active ? activeColor : 'transparent',
-  }),
-);
+import { scrollToId } from '../ui/utils';
 
 interface Props {
   alwaysShowProjectName?: boolean;
@@ -59,18 +42,15 @@ const VideoSelector = ({
       pointer>
       <l.Img size={[th.sizes.md, th.sizes.lg]} src={video.iconSrc} />
       <l.Div height={th.spacing.md} />
-      <ty.SmallText center nowrap>
+      <ty.Text
+        center
+        color={
+          active ? categories[video.categoryId].frameColor : th.colors.white
+        }
+        nowrap
+        transition={th.transitions.default}>
         {alwaysShowProjectName ? video.name : categories[video.categoryId].name}
-      </ty.SmallText>
-      {isTabletUp() && (
-        <>
-          <l.Div height={th.spacing.md} />
-          <ActiveIndicator
-            active={active}
-            activeColor={categories[video.categoryId].activeColor}
-          />
-        </>
-      )}
+      </ty.Text>
     </l.FlexColumn>
   );
 };

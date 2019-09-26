@@ -1,6 +1,6 @@
 // Route names
 export const SERVICES_PATH = '/services';
-export const FEATURED_WORKS_PATH = '/featured-works';
+export const TESTIMONIALS_PATH = '/testimonials';
 export const CONTACT_PATH = '/contact';
 
 export const INSTAGRAM_PATH = 'https://www.instagram.com/shootingstar.us';

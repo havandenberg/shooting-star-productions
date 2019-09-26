@@ -16,7 +16,7 @@ import {
   SOCIAL_MEDIA,
 } from './categories';
 
-const featuredWorks: Video[] = [
+const testimonials: Video[] = [
   {
     categoryId: COMMERCIAL_ADS,
     clientName: 'Project / Client Name',
@@ -97,4 +97,4 @@ const featuredWorks: Video[] = [
   },
 ];
 
-export default featuredWorks;
+export default testimonials;

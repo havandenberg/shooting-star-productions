@@ -8,13 +8,15 @@ import ty from '../ui/typography';
 import { SERVICES_PATH } from '../utils/constants';
 
 const StarTrails = styled(l.Img)({
-  left: -950,
-  top: `-${th.sizes.xl}`,
+  left: -800,
+  height: 100,
+  top: `-${th.spacing.md}`,
   position: 'absolute',
+  width: 800,
   [th.breakpointQueries.small]: {
     height: '95%',
-    left: -550,
-    top: `-${th.sizes.md}`,
+    left: -800,
+    top: `-${th.sizes.lg}`,
   },
 });
 

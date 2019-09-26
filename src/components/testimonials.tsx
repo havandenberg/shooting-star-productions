@@ -1,5 +1,5 @@
 import * as React from 'react';
-import featuredWorks from '../content/featured-works';
+import testimonials from '../content/testimonials';
 import l from '../ui/layout';
 import th from '../ui/theme';
 import ty from '../ui/typography';
@@ -7,16 +7,14 @@ import ContactSection from './contact-section';
 import withScroll from './hoc/with-scroll';
 import VideoPlayer, { VideoChildrenProps } from './video-player';
 
-const FeaturedWorks = () => (
+const Testimonials = () => (
   <l.FlexColumn mx="auto" my={th.spacing.lg} width={['90%', '90%', '100%']}>
-    <ty.H2 color={th.colors.brand.primary} fontSize={th.fontSizes.h3}>
-      Featured Works
-    </ty.H2>
+    <ty.H2 fontSize={th.fontSizes.h3}>Testimonials</ty.H2>
     <l.Div height={[th.spacing.lg, th.spacing.xl]} />
     <VideoPlayer
       alwaysShowProjectName
       initialSelectedId="commercial-ads"
-      videos={featuredWorks}>
+      videos={testimonials}>
       {({ selectedVideo }: VideoChildrenProps) =>
         selectedVideo.clientName && selectedVideo.testimonial ? (
           <l.PageContent>
@@ -43,8 +41,8 @@ const FeaturedWorks = () => (
       <l.Div height={[th.spacing.xl, th.spacing.xl]} />
       <ContactSection />
     </l.PageContent>
-    <l.Div height={[th.spacing.xl, th.spacing.xl, th.spacing.xxl]} />
+    <l.Div height={[th.spacing.xl, th.spacing.xxl]} />
   </l.FlexColumn>
 );
 
-export default withScroll(FeaturedWorks);
+export default withScroll(Testimonials);

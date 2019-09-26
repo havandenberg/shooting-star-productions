@@ -95,21 +95,22 @@ export const widths = {
 
 // Typography
 export const fontFamilies = {
-  main: 'Audiowide-Regular, system-ui, sans-serif',
+  heading: 'Audiowide-Regular, system-ui, sans-serif',
+  main: 'RobotoCondensed-Regular, system-ui, sans-serif',
 };
 
 const getFontSize = (value: number, modifier: number) =>
   `calc(${value}px + (${modifier} - ${value}) * ((${
-    window.innerWidth <= parseInt(widths.maxPage, 10) ? '100vw' : '1400px'
+    window.innerWidth <= parseInt(widths.maxPage, 10) ? '100vw' : '1440px'
   } - 400px) / 1200))`;
 
 export const fontSizes = {
   xs: getFontSize(12, 16),
   sm: getFontSize(14, 16),
   md: getFontSize(16, 16),
-  lg: getFontSize(18, 20),
-  main: getFontSize(16, 18),
-  h3: getFontSize(18, 30),
+  lg: getFontSize(18, 24),
+  main: getFontSize(16, 20),
+  h3: getFontSize(20, 30),
   h2: getFontSize(24, 42),
   h1: getFontSize(32, 56),
 };
@@ -119,7 +120,7 @@ export const fontWeights = {
   bold: 700,
 };
 
-export const lineHeights = { single: 1, heading: 1.25, main: 1.5 };
+export const lineHeights = { single: 1, heading: 1.25, main: 1.75 };
 
 // Display
 export const borders = {
@@ -244,13 +245,15 @@ export const colorStyles = {
 
 export const textStyles = {
   heading: {
-    fontFamily: fontFamilies.main,
+    fontFamily: fontFamilies.heading,
     fontWeight: fontWeights.bold,
     lineHeight: lineHeights.heading,
   },
   main: {
     fontFamily: fontFamilies.main,
+    fontSize: fontSizes.main,
     fontWeight: fontWeights.normal,
+    letterSpacing: 2,
     lineHeight: lineHeights.main,
   },
   caps: {
@@ -268,39 +271,26 @@ export const globalStyles = {
   // Text
   'html,button': {
     color: colors.text.main,
-    fontSize: fontSizes.main,
-    textStyle: textStyles.main,
+    fontSize: fontSizes.lg,
     margin: 0,
     padding: 0,
+    ...textStyles.main,
   },
   body: {
     background: colors.black,
     fontFamily: fontFamilies.main,
-    letterSpacing: 2,
     margin: 0,
-    overflowX: 'hidden',
-    overflowY: 'auto',
     padding: 0,
   },
-  '@media(min-width:360px)': {
-    'html,button': {
-      fontSize: '18px',
-    },
-  },
-  '@media(min-width:720px)': {
-    'html,button': {
-      fontSize: '20px',
-    },
-  },
   p: {
-    lineHeight: 2,
+    lineHeight: lineHeights.main,
     margin: 0,
   },
   // Headings
   'h1,h2,h3,h4,h5,h6': {
     margin: 0,
     marginBottom: '1rem',
-    textStyle: textStyles.heading,
+    ...textStyles.heading,
   },
   h1: {
     fontSize: fontSizes.h1,
@@ -337,7 +327,6 @@ export const globalStyles = {
   button: {
     border: 'none',
     fontFamily: fontFamilies.main,
-    paddingX: '32px',
   },
 };
 

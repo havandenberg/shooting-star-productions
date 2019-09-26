@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Scale } from '../types/ui';
 import { DivProps, divPropsSet } from './layout';
 import th from './theme';
+import { isTabletUp } from './utils';
 
 type ActionProps = (
   activeColor: string,
@@ -14,10 +15,16 @@ const getCommonActionProps: (size: Scale) => any = (size = 'big') => ({
   alignItems: 'center',
   cursor: 'pointer',
   display: 'flex',
-  fontSize: size === 'big' ? th.fontSizes.lg : th.fontSizes.main,
+  fontFamily: th.fontFamilies.heading,
+  fontSize: size === 'big' ? th.fontSizes.main : th.fontSizes.sm,
   fontWeight: 500,
   justifyContent: 'center',
-  padding: size === 'big' ? [th.spacing.sm, th.spacing.md] : th.spacing.sm,
+  padding:
+    size === 'big'
+      ? isTabletUp()
+        ? `${th.spacing.md} ${th.spacing.lg}`
+        : `${th.spacing.sm} ${th.spacing.md}`
+      : `${th.spacing.sm} ${th.spacing.lg}`,
   position: 'relative',
   textAlign: 'center',
   transition: th.transitions.default,

@@ -40,6 +40,7 @@ interface CustomDivProps {
   columnOnMobile?: boolean;
   columnReverseOnMobile?: boolean;
   grow?: number;
+  inline?: boolean;
   justifyEnd?: boolean;
   justifyStart?: boolean;
   pointer?: boolean;
@@ -62,6 +63,7 @@ const customOptions: (props: CustomDivProps) => any = ({
   columnOnMobile,
   columnReverseOnMobile,
   grow,
+  inline,
   justifyEnd,
   justifyStart,
   pointer,
@@ -74,6 +76,7 @@ const customOptions: (props: CustomDivProps) => any = ({
     ? 'flex-end'
     : undefined,
   cursor: pointer ? 'pointer' : undefined,
+  display: inline ? 'inline-block' : undefined,
   flexGrow: grow,
   flexWrap: wrap ? 'wrap' : undefined,
   [th.breakpointQueries.small]:

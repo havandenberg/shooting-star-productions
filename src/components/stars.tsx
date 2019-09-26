@@ -6,11 +6,11 @@ import th from '../ui/theme';
 const Stars = () => {
   return (
     <l.FlexCentered>
-      <l.Img size={[th.sizes.icon, th.sizes.sm]} src={StarImg} />
+      <l.Img size={[th.sizes.xs, th.sizes.icon]} src={StarImg} />
       <l.Div width={th.spacing.lg} />
-      <l.Img size={[th.sizes.icon, th.sizes.sm]} src={StarImg} />
+      <l.Img size={[th.sizes.xs, th.sizes.icon]} src={StarImg} />
       <l.Div width={th.spacing.lg} />
-      <l.Img size={[th.sizes.icon, th.sizes.sm]} src={StarImg} />
+      <l.Img size={[th.sizes.xs, th.sizes.icon]} src={StarImg} />
     </l.FlexCentered>
   );
 };

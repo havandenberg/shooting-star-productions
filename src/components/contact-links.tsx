@@ -14,7 +14,6 @@ const ContactLink = styled(l.FlexColumn)({
 });
 
 const ContactText = styled(ty.Text)({
-  fontWeight: th.fontWeights.bold,
   marginTop: th.spacing.md,
 });
 

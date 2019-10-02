@@ -7,6 +7,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import styled from '@emotion/styled';
+import Background from '../components/background';
 import Global from '../ui/global';
 import l from '../ui/layout';
 import th from '../ui/theme';
@@ -15,10 +16,10 @@ import {
   SERVICES_PATH,
   TESTIMONIALS_PATH,
 } from '../utils/constants';
-import Background from './background';
 import Contact from './contact';
 import Footer from './footer';
 import Header from './header';
+import Intro from './intro';
 import MobileNav from './mobile-nav';
 import Nav from './nav';
 import Services from './services';
@@ -33,15 +34,24 @@ const Main = styled(l.Div)({
 });
 
 interface State {
-  loading: boolean;
+  showIntro: boolean;
 }
 
 class App extends React.Component<{}, State> {
+  state = {
+    showIntro: Boolean(localStorage.getItem('show-intro')),
+  };
+
+  toggleShowIntro = (showIntro: boolean) => {
+    this.setState({ showIntro });
+  };
+
   render() {
     return (
       <Router>
         <ThemeProvider theme={th}>
           <Main id="top">
+            <Intro toggleShowIntro={this.toggleShowIntro} />
             <Nav />
             <MobileNav />
             <Header />

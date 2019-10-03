@@ -13,7 +13,9 @@ const ContactSection = () => (
     <l.Div height={[th.spacing.xl, th.spacing.xxl]} />
     <ty.H2 center>Ready to Partner?</ty.H2>
     <l.Div height={th.spacing.lg} />
-    <ty.Text center>Contact us about your custom media production!</ty.Text>
+    <ty.LargeText center>
+      Contact us about your custom media production!
+    </ty.LargeText>
     <l.Div height={th.spacing.xl} />
     <l.FlexColumn>
       <a.LinkPrimary to={CONTACT_PATH}>Send us a message</a.LinkPrimary>

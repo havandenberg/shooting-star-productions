@@ -28,18 +28,23 @@ const VideoSelector = ({
 }: Props) => {
   const active =
     R.equals(selectedVideoId, video.id) || R.equals(hoverId, video.id);
+
   const handleServiceClick = () => {
     setVideoId(video.id);
     scrollToId('categories', { offset: -70 });
   };
+
+  const wrapperProps = R.isEmpty(video.videoSrc)
+    ? {}
+    : {
+        onClick: handleServiceClick,
+        onMouseEnter,
+        onMouseLeave,
+        pointer: true,
+      };
+
   return (
-    <l.FlexColumn
-      onClick={handleServiceClick}
-      mb={th.spacing.sm}
-      mx={th.spacing.md}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      pointer>
+    <l.FlexColumn mb={th.spacing.sm} mx={th.spacing.md} {...wrapperProps}>
       <l.Img size={[th.sizes.md, th.sizes.lg]} src={video.iconSrc} />
       <l.Div height={th.spacing.md} />
       <ty.Text

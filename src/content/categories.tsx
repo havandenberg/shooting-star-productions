@@ -7,6 +7,7 @@ export const REAL_ESTATE = 'real-estate';
 export const EVENTS = 'events';
 export const SOCIAL_MEDIA = 'social-media';
 export const CUSTOM_IDEA = 'custom-idea';
+export const TESTIMONIALS = 'testimonials';
 
 const categories: { [key: string]: VideoCategory } = {
   [COMMERCIAL_ADS]: {
@@ -44,6 +45,12 @@ const categories: { [key: string]: VideoCategory } = {
     frameColor: th.colors.brand.primary,
     id: CUSTOM_IDEA,
     name: 'Your Awesome Idea',
+  },
+  [TESTIMONIALS]: {
+    activeColor: th.colors.brand.primary,
+    frameColor: th.colors.brand.primary,
+    id: TESTIMONIALS,
+    name: 'Testimonials',
   },
 };
 

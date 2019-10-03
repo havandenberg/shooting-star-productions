@@ -203,7 +203,10 @@ class VideoPlayer extends React.Component<Props, State> {
 
     return (
       <l.FlexColumn width="100%">
-        <l.Div position="relative" mx={`-${th.spacing.md}`} width={['100%', '100%', '90%']}>
+        <l.Div
+          position="relative"
+          mx={`-${th.spacing.md}`}
+          width={['100%', '100%', '90%']}>
           {showLeftArrow && <LeftArrow src={LeftFadeImg} />}
           <l.ScrollFlex
             id="categories"
@@ -240,6 +243,7 @@ class VideoPlayer extends React.Component<Props, State> {
             <video
               controls={isPlaying}
               height="100%"
+              key={selectedVideo.videoSrc}
               preload="true"
               poster={selectedVideo.videoCover}
               ref={this.vid}

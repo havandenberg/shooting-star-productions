@@ -29,7 +29,7 @@ const Services = () => (
       <l.Primary>reality</l.Primary>!
     </ty.Text>
     <l.Div height={[th.spacing.lg, th.spacing.xl]} />
-    <VideoPlayer initialSelectedId="crunch-fitness" videos={services} />
+    <VideoPlayer initialSelectedId="commercial-ads" videos={services} />
     <l.Div height={th.spacing.xl} />
     <l.PageContent>
       <ty.LargeText center>Any other format by request!</ty.LargeText>
@@ -37,16 +37,23 @@ const Services = () => (
       <Stars />
       <l.Div height={[th.spacing.xl, th.spacing.xxl]} />
       <ty.LargeText center>
-        <l.Primary>What we do</l.Primary> is make video for business, but{' '}
-        <l.Primary>who we are</l.Primary> is a small team of curious people.
-        Curious about your business, what makes you special, what you’re experts
-        in.
+        At Shooting Star Production we specialize in helping customers{' '}
+        <l.Primary>share their stories</l.Primary> through video. Our team
+        utilizes the <l.Primary>latest tools and technology</l.Primary> to make
+        sure that we always get the right shot and that the final product is the
+        best possible.
       </ty.LargeText>
       <l.Div height={[th.spacing.lg, th.spacing.xl]} />
       <ty.LargeText center>
-        We want to know the <l.Primary>what</l.Primary>, the{' '}
-        <l.Primary>why</l.Primary>, the <l.Primary>how</l.Primary> – pick your
-        brain and turn the findings into a video.
+        We've created videos for a <l.Primary>variety of needs</l.Primary>{' '}
+        including weddings, commercials, real estate ventures, and more. It is
+        our number one priority to provide the{' '}
+        <l.Primary>best service and experience</l.Primary> possible as we help
+        to make our customers visions a reality.
+      </ty.LargeText>
+      <l.Div height={[th.spacing.lg, th.spacing.xl]} />
+      <ty.LargeText center>
+        <l.Primary>Anything you can visualize, we can create!</l.Primary>
       </ty.LargeText>
       <l.Div height={[th.spacing.xl, th.spacing.xxl]} />
       <l.FlexColumn>

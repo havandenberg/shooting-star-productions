@@ -13,7 +13,7 @@ const Testimonials = () => (
     <l.Div height={[th.spacing.lg, th.spacing.xl]} />
     <VideoPlayer
       alwaysShowProjectName
-      initialSelectedId="commercial-ads"
+      initialSelectedId="testimonial-1"
       videos={testimonials}>
       {({ selectedVideo }: VideoChildrenProps) =>
         selectedVideo.clientName && selectedVideo.testimonial ? (

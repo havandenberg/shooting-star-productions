@@ -19,7 +19,6 @@ import {
 import Contact from './contact';
 import Footer from './footer';
 import Header from './header';
-import Intro from './intro';
 import MobileNav from './mobile-nav';
 import Nav from './nav';
 import Services from './services';
@@ -39,7 +38,7 @@ interface State {
 
 class App extends React.Component<{}, State> {
   state = {
-    showIntro: Boolean(localStorage.getItem('show-intro')),
+    showIntro: true,
   };
 
   toggleShowIntro = (showIntro: boolean) => {
@@ -47,14 +46,17 @@ class App extends React.Component<{}, State> {
   };
 
   render() {
+    const { showIntro } = this.state;
     return (
       <Router>
         <ThemeProvider theme={th}>
           <Main id="top">
-            <Intro toggleShowIntro={this.toggleShowIntro} />
             <Nav />
             <MobileNav />
-            <Header />
+            <Header
+              showIntro={showIntro}
+              toggleShowIntro={this.toggleShowIntro}
+            />
             <Switch>
               <Route exact path={SERVICES_PATH} component={Services} />
               <Route exact path={TESTIMONIALS_PATH} component={Testimonials} />

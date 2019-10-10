@@ -10,8 +10,8 @@ const testimonials: Video[] = [
     iconSrc: StarImg,
     id: 'testimonial-1',
     name: 'John Cokinos',
-    videoCover: `${ASSETS_PATH}/auto.png`,
-    videoSrc: `${ASSETS_PATH}/auto.m4v`,
+    videoCover: `${ASSETS_PATH}/john-testimonial.png`,
+    videoSrc: `${ASSETS_PATH}/john-testimonial.mp4`,
   },
 ];
 

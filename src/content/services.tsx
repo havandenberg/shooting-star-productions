@@ -6,7 +6,7 @@ import IdeaImg from '../assets/images/idea.svg';
 import SocialMediaImg from '../assets/images/social-media.svg';
 import { Video } from '../types/video';
 import { ASSETS_PATH } from '../utils/constants';
-import categories, {
+import {
   COMMERCIAL_ADS,
   CUSTOM_IDEA,
   EVENTS,
@@ -39,15 +39,14 @@ const services: Video[] = [
     name: 'Real Estate',
     videoCover: `${ASSETS_PATH}/real-estate.png`,
     videoSrc: `${ASSETS_PATH}/real-estate.m4v`,
-    ...categories.realEstate,
   },
   {
     categoryId: EVENTS,
     iconSrc: EventsImg,
     id: 'events',
     name: '',
-    videoCover: '',
-    videoSrc: '',
+    videoCover: `${ASSETS_PATH}/events.png`,
+    videoSrc: `${ASSETS_PATH}/events.mp4`,
   },
   {
     categoryId: SOCIAL_MEDIA,

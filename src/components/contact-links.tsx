@@ -30,9 +30,7 @@ const ContactLinks = ({ flexDirection = 'column' }: Props) => {
       <ContactLink width={['auto', 269]}>
         <l.Img height={th.sizes.md} src={AddressImg} />
         <ContactText center color={th.colors.brand.green} nowrap>
-          50 Franklin St
-          <br />
-          Worcester, MA 01609
+          Worcester, MA
         </ContactText>
       </ContactLink>
     </a>
@@ -44,20 +42,20 @@ const ContactLinks = ({ flexDirection = 'column' }: Props) => {
         columnOnMobile
         flexDirection={flexDirection}
         mx="auto">
-        <a href="tel:11234567890">
+        <a href="tel:15088476380">
           <ContactLink width={['auto', 269]}>
             <l.Img height={th.sizes.md} src={PhoneImg} />
             <ContactText color={th.colors.brand.red} nowrap>
-              123-456-7890
+              (508) 847-6380
             </ContactText>
           </ContactLink>
         </a>
         <l.Div height={th.spacing.xl} />
-        <a href="mailto:contact@shooting-star.us">
+        <a href="mailto:contactshooting2018@gmail.com">
           <ContactLink width={['auto', 269]}>
             <l.Img height={th.sizes.md} src={EmailImg} />
             <ContactText color={th.colors.brand.blue} nowrap>
-              contact@shooting-star.us
+              contactshooting2018@gmail.com
             </ContactText>
           </ContactLink>
         </a>

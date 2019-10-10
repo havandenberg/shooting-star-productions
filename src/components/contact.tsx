@@ -243,19 +243,15 @@ const Contact = () => {
             </ty.LargeText>
             <l.Div height={th.spacing.lg} />
             <ty.SmallText mb={th.spacing.md}>
-              I started Shooting Star Productions. Nicolas Andrews is a
-              freelance videographer and still photographer based in the
-              Philadelphia area.
+              I’m a videographer and photographer in the Worcester area. I’ve
+              been making videos, taking photos, and using social media since
+              2012.
             </ty.SmallText>
             <ty.SmallText>
-              In the last few years, Dave has worked on a variety of projects,
-              mostly for nonprofit and arts organizations. He also shot second
-              camera for Danny’s Guitar Shop, a television program that aired on
-              WHYY. Currently, Dave works on video projects for McCarter Theatre
-              Center, The Pew Center for Arts & Heritage, Visit Philadelphia,
-              The Food Trust, Al-Bustan Seeds of Culture, and Mural Arts
-              Philadelphia. Additionally, Dave co-produces a monthly arts video
-              feature for JerseyArts.com.
+              In the last few years, I started doing YouTube and people would
+              really enjoy my editing. That's when Shooting Star Production was
+              created! I wanted to help others capture moments and share their
+              stories.
             </ty.SmallText>
           </l.FlexColumn>
         </l.FlexBetween>

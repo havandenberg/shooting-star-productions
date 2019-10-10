@@ -45,11 +45,11 @@ const Services = () => (
       </ty.LargeText>
       <l.Div height={[th.spacing.lg, th.spacing.xl]} />
       <ty.LargeText center>
-        We've created videos for a <l.Primary>variety of needs</l.Primary>{' '}
-        including weddings, commercials, real estate ventures, and more. It is
-        our number one priority to provide the{' '}
-        <l.Primary>best service and experience</l.Primary> possible as we help
-        to make our customers visions a reality.
+        We create videos for a <l.Primary>variety of needs</l.Primary> including
+        weddings, commercials, real estate ventures, or anything you can think
+        of. It is our number one priority to provide the{' '}
+        <l.Primary>best service and experience</l.Primary> as possible while we
+        help to make our clients' vision a reality.
       </ty.LargeText>
       <l.Div height={[th.spacing.lg, th.spacing.xl]} />
       <ty.LargeText center>
